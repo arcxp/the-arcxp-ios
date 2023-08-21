@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>888901916739-r0olbcbu1rlqegj432dbpoilkjarlcv6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.888901916739-r0olbcbu1rlqegj432dbpoilkjarlcv6</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDP-yyqVhRRgeBS1G4ejqRhBI9F50veR2E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>888901916739</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.arcxp.sdk.content.TheArcXP</string>
+	<key>PROJECT_ID</key>
+	<string>arc-xp-mobile</string>
+	<key>STORAGE_BUCKET</key>
+	<string>arc-xp-mobile.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:888901916739:ios:8a111358953f3eb7bbdcf6</string>
+</dict>
+</plist>

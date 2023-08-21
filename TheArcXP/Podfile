@@ -1,0 +1,16 @@
+# Podspec Sources
+source 'https://github.com/CocoaPods/Specs.git'
+source 'git@github.com:arcxp/arc-mobile-podspecs.git'
+
+platform :ios, '15.0'
+use_frameworks!
+
+target 'TheArcXP' do
+  pod 'ArcXP', '1.0.0'
+end 
+target 'StoriesWidgetExtension' do
+  pod 'ArcXP', '1.0.0'
+end
+target 'Widget' do
+  pod 'ArcXP', '1.0.0'
+end
