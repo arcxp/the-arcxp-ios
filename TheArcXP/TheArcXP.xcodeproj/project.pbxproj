@@ -112,7 +112,16 @@
 		A55C9AF32810516700974A46 /* OldEnglishFive.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A55C9AF22810516700974A46 /* OldEnglishFive.ttf */; };
 		A566044028088B0D0000B243 /* HTMLStringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A566043F28088B0D0000B243 /* HTMLStringView.swift */; };
 		A566044A280DEE9D0000B243 /* LinkTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5660449280DEE9D0000B243 /* LinkTextView.swift */; };
+		A56B2EA62A743CAA00A029DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A56B2EA52A743CAA00A029DE /* GoogleService-Info.plist */; };
 		A570543027C809FA004A1A5B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A570542F27C809FA004A1A5B /* Launch Screen.storyboard */; };
+		A58F15622A81407A008B0E5D /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F15612A81407A008B0E5D /* AnalyticsEvent.swift */; };
+		A58F15652A81416C008B0E5D /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F15642A81416C008B0E5D /* AnalyticsService.swift */; };
+		A58F15672A81422B008B0E5D /* GoogleAnalyticsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F15662A81422B008B0E5D /* GoogleAnalyticsProvider.swift */; };
+		A58F15692A814427008B0E5D /* AnalyticsEventMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F15682A814427008B0E5D /* AnalyticsEventMapper.swift */; };
+		A58F156B2A82D27E008B0E5D /* AnalyticsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F156A2A82D27E008B0E5D /* AnalyticsConstants.swift */; };
+		A58F156D2A8A82B3008B0E5D /* AnalyticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F156C2A8A82B3008B0E5D /* AnalyticsScreen.swift */; };
+		A5A90EBA2A71CA61005D7609 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A5A90EB92A71CA61005D7609 /* FirebaseAnalyticsSwift */; };
+		A5A90EBC2A71CA61005D7609 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = A5A90EBB2A71CA61005D7609 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		A5BCC12327E8D20B00CBAF9A /* ContentLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCC12227E8D20B00CBAF9A /* ContentLoadingIndicator.swift */; };
 		A5BCC12527E9094A00CBAF9A /* View+Hidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCC12427E9094A00CBAF9A /* View+Hidden.swift */; };
 		A5BCC12727EA599C00CBAF9A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCC12627EA599C00CBAF9A /* LoadingView.swift */; };
@@ -126,7 +135,7 @@
 		A5F8222A2833FDD500C95ABA /* StoryStandardRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F822292833FDD500C95ABA /* StoryStandardRowView.swift */; };
 		A5F8222C283404CC00C95ABA /* StoryFocusedRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F8222B283404CC00C95ABA /* StoryFocusedRowView.swift */; };
 		A5F8222E283BE22500C95ABA /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F8222D283BE22500C95ABA /* GalleryView.swift */; };
-		F2B4FC3DFE536EA97DF99575 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		F2B4FC3DFE536EA97DF99575 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -300,8 +309,15 @@
 		A55C9AF22810516700974A46 /* OldEnglishFive.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OldEnglishFive.ttf; sourceTree = "<group>"; };
 		A566043F28088B0D0000B243 /* HTMLStringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLStringView.swift; sourceTree = "<group>"; };
 		A5660449280DEE9D0000B243 /* LinkTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTextView.swift; sourceTree = "<group>"; };
+		A56B2EA52A743CAA00A029DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A570542E27C807AD004A1A5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A570542F27C809FA004A1A5B /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		A58F15612A81407A008B0E5D /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
+		A58F15642A81416C008B0E5D /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
+		A58F15662A81422B008B0E5D /* GoogleAnalyticsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAnalyticsProvider.swift; sourceTree = "<group>"; };
+		A58F15682A814427008B0E5D /* AnalyticsEventMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventMapper.swift; sourceTree = "<group>"; };
+		A58F156A2A82D27E008B0E5D /* AnalyticsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConstants.swift; sourceTree = "<group>"; };
+		A58F156C2A8A82B3008B0E5D /* AnalyticsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsScreen.swift; sourceTree = "<group>"; };
 		A5BCC12227E8D20B00CBAF9A /* ContentLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLoadingIndicator.swift; sourceTree = "<group>"; };
 		A5BCC12427E9094A00CBAF9A /* View+Hidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Hidden.swift"; sourceTree = "<group>"; };
 		A5BCC12627EA599C00CBAF9A /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -324,9 +340,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A02AA4F2A12AF27003C2A5F /* GoogleMobileAds in Frameworks */,
+				A5A90EBC2A71CA61005D7609 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				9A4A85EB28527F0300C9F7C0 /* FacebookLogin in Frameworks */,
 				9A4A85E928527F0300C9F7C0 /* FacebookCore in Frameworks */,
 				4BAA3748788D5747DE3B5534 /* Pods_TheArcXP.framework in Frameworks */,
+				A5A90EBA2A71CA61005D7609 /* FirebaseAnalyticsSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,7 +368,7 @@
 			files = (
 				5A1B1231287FAB03003D1EFD /* SwiftUI.framework in Frameworks */,
 				5A1B122F287FAB03003D1EFD /* WidgetKit.framework in Frameworks */,
-				F2B4FC3DFE536EA97DF99575 /* BuildFile in Frameworks */,
+				F2B4FC3DFE536EA97DF99575 /* (null) in Frameworks */,
 				776158F512D7E032F6B69764 /* Pods_StoriesWidgetExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,6 +452,7 @@
 		3C00672C27B6199D00B93F86 /* TheArcXP */ = {
 			isa = PBXGroup;
 			children = (
+				A56B2EA52A743CAA00A029DE /* GoogleService-Info.plist */,
 				3C655F972848E24800E00EB8 /* TheArcXP.entitlements */,
 				A570542E27C807AD004A1A5B /* Info.plist */,
 				9DA53B832899CAE400E2EE0F /* WidgetInfo.plist */,
@@ -445,6 +464,7 @@
 				A5C954D127E1071900728FA2 /* Utilities */,
 				3C00673127B6199E00B93F86 /* Assets.xcassets */,
 				3C00673327B6199E00B93F86 /* Preview Content */,
+				A58F15632A814080008B0E5D /* Analytics */,
 			);
 			path = TheArcXP;
 			sourceTree = "<group>";
@@ -690,6 +710,19 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		A58F15632A814080008B0E5D /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				A58F15612A81407A008B0E5D /* AnalyticsEvent.swift */,
+				A58F15642A81416C008B0E5D /* AnalyticsService.swift */,
+				A58F15662A81422B008B0E5D /* GoogleAnalyticsProvider.swift */,
+				A58F15682A814427008B0E5D /* AnalyticsEventMapper.swift */,
+				A58F156A2A82D27E008B0E5D /* AnalyticsConstants.swift */,
+				A58F156C2A8A82B3008B0E5D /* AnalyticsScreen.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
 		A5C954D127E1071900728FA2 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -764,6 +797,8 @@
 				9A4A85E828527F0300C9F7C0 /* FacebookCore */,
 				9A4A85EA28527F0300C9F7C0 /* FacebookLogin */,
 				5A02AA4E2A12AF27003C2A5F /* GoogleMobileAds */,
+				A5A90EB92A71CA61005D7609 /* FirebaseAnalyticsSwift */,
+				A5A90EBB2A71CA61005D7609 /* FirebaseAnalyticsWithoutAdIdSupport */,
 			);
 			productName = "the-arcxp-iOS";
 			productReference = 3C00672A27B6199D00B93F86 /* TheArcXP.app */;
@@ -967,7 +1002,8 @@
 			mainGroup = 3C00672127B6199D00B93F86;
 			packageReferences = (
 				9A4A85E728527F0300C9F7C0 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
-				5A02AA4D2A12AF27003C2A5F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads.git" */,
+				5A02AA4D2A12AF27003C2A5F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				A5A90EB82A71CA61005D7609 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 3C00672B27B6199D00B93F86 /* Products */;
 			projectDirPath = "";
@@ -997,6 +1033,7 @@
 				3C00673527B6199E00B93F86 /* Preview Assets.xcassets in Resources */,
 				5A9B8C362A37AB3C008B1EBC /* NativeAdView.xib in Resources */,
 				3C00673227B6199E00B93F86 /* Assets.xcassets in Resources */,
+				A56B2EA62A743CAA00A029DE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1190,12 +1227,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A54981EE27E147CB00C3F4C1 /* CreateAccountSuccessView.swift in Sources */,
+				A58F15652A81416C008B0E5D /* AnalyticsService.swift in Sources */,
+				A58F15672A81422B008B0E5D /* GoogleAnalyticsProvider.swift in Sources */,
 				5ADDF1F82A608F1B002C7B00 /* UINavigationController+Gesture.swift in Sources */,
 				A5F822282825C5D000C95ABA /* ErrorType.swift in Sources */,
 				5A02AA552A12CC19003C2A5F /* BannerAdView.swift in Sources */,
 				A5F8222A2833FDD500C95ABA /* StoryStandardRowView.swift in Sources */,
 				A54981F227E4CA9B00C3F4C1 /* Constants.swift in Sources */,
+				A58F156B2A82D27E008B0E5D /* AnalyticsConstants.swift in Sources */,
 				5A7ECEAC2988442000E50E23 /* IntentHandler.swift in Sources */,
+				A58F156D2A8A82B3008B0E5D /* AnalyticsScreen.swift in Sources */,
 				5C10A83428908728003B16B0 /* SDKUtils.swift in Sources */,
 				A5C954D827E1087000728FA2 /* CreateAccountView.swift in Sources */,
 				9D4CDAD827D9736E00D7120B /* SDKInitializer.swift in Sources */,
@@ -1231,6 +1272,7 @@
 				5A1B12A42887291F003D1EFD /* DateFormatterExtension.swift in Sources */,
 				A525C02F27FE33B200BB1157 /* ImageLoader.swift in Sources */,
 				3C8231192822B2BA0078AC40 /* ForgotPasswordView.swift in Sources */,
+				A58F15622A81407A008B0E5D /* AnalyticsEvent.swift in Sources */,
 				A5BCC12527E9094A00CBAF9A /* View+Hidden.swift in Sources */,
 				3C8C4B74283EBEFC00E39D35 /* PayWallToast.swift in Sources */,
 				3C00672E27B6199D00B93F86 /* TheArcXP.swift in Sources */,
@@ -1248,6 +1290,7 @@
 				5AD80A5D2A212B4E00452B47 /* GoogleAdsManager.swift in Sources */,
 				3C6EF5B327E8AA5A0004FADE /* MenuContainerView.swift in Sources */,
 				3C655F9D2848E2DC00E00EB8 /* ThirdPartyLoginManager.swift in Sources */,
+				A58F15692A814427008B0E5D /* AnalyticsEventMapper.swift in Sources */,
 				A50B5FB4281310E400CD1EC1 /* UserViewModel.swift in Sources */,
 				A5C954D327E1073200728FA2 /* NavigationBarTheme.swift in Sources */,
 				5A9B8C342A376A52008B1EBC /* NativeAdViewModel.swift in Sources */,
@@ -1540,7 +1583,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcxp.sdk.content.TheArcXP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1578,7 +1621,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcxp.sdk.content.TheArcXP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1597,7 +1640,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Arc-XP.the-arcxp-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1616,7 +1659,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Arc-XP.the-arcxp-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1634,7 +1677,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Arc-XP.the-arcxp-iOSUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1652,7 +1695,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Arc-XP.the-arcxp-iOSUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1751,7 +1794,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcxp.sdk.content.TheArcXP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1770,7 +1813,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Arc-XP.the-arcxp-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1788,7 +1831,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Arc-XP.the-arcxp-iOSUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1835,7 +1878,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2829339WJT;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arc.Commerce.TheArcXPtvOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1855,7 +1898,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2829339WJT;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arc.Commerce.TheArcXPtvOSUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1887,7 +1930,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcxp.sdk.content.TheArcXP.StoriesWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1918,7 +1961,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcxp.sdk.content.TheArcXP.StoriesWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1949,7 +1992,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcxp.sdk.content.TheArcXP.StoriesWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1979,7 +2022,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcxp.sdk.content.TheArcXP.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2008,7 +2051,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcxp.sdk.content.TheArcXP.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2037,7 +2080,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcxp.sdk.content.TheArcXP.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2065,7 +2108,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcxp.sdk.content.TheArcXP.WidgetUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2093,7 +2136,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcxp.sdk.content.TheArcXP.WidgetUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2121,7 +2164,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arcxp.sdk.content.TheArcXP.WidgetUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2196,7 +2239,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2829339WJT;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arc.Commerce.TheArcXPtvOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -2217,7 +2260,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2829339WJT;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arc.Commerce.TheArcXPtvOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -2237,7 +2280,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2829339WJT;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arc.Commerce.TheArcXPtvOSUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -2257,7 +2300,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2829339WJT;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.arc.Commerce.TheArcXPtvOSUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -2375,7 +2418,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5A02AA4D2A12AF27003C2A5F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads.git" */ = {
+		5A02AA4D2A12AF27003C2A5F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
 			requirement = {
@@ -2391,12 +2434,20 @@
 				version = 13.2.0;
 			};
 		};
+		A5A90EB82A71CA61005D7609 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		5A02AA4E2A12AF27003C2A5F /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5A02AA4D2A12AF27003C2A5F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads.git" */;
+			package = 5A02AA4D2A12AF27003C2A5F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
 		};
 		9A4A85E828527F0300C9F7C0 /* FacebookCore */ = {
@@ -2408,6 +2459,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9A4A85E728527F0300C9F7C0 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookLogin;
+		};
+		A5A90EB92A71CA61005D7609 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5A90EB82A71CA61005D7609 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		A5A90EBB2A71CA61005D7609 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5A90EB82A71CA61005D7609 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -29,7 +29,7 @@ class IntentHandler: INExtension, SelectSectionIntentHandling {
                 }
                 let collection = INObjectCollection(items: categories)
                 completion(collection, nil)
-            case .failure(_):
+            case .failure:
                 break
             }
 

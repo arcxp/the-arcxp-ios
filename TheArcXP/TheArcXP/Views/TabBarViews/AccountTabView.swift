@@ -27,6 +27,7 @@ struct AccountTabView: View {
     @State var listDisabled = false
     @State var sectionListHidden = false
     @StateObject fileprivate var contentViewModel = ContentViewModel()
+    private var analyticsService: AnalyticsService = .shared
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -49,7 +50,8 @@ struct AccountTabView: View {
                     NavigationLink(destination: CreateAccountView().navigationBarHidden(true)) {
                         HStack {
                             Text(Constants.Account.createAccount)
-                                .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                                .foregroundColor(colorScheme == .dark ?
+                                                 ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                             Spacer()
                         }
                         .padding([.top, .bottom])
@@ -59,7 +61,8 @@ struct AccountTabView: View {
                     NavigationLink(destination: SignInView(showSignInView: $showSignInControl).navigationBarHidden(true)) {
                         HStack {
                             Text(Constants.Account.login)
-                                .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                                .foregroundColor(colorScheme == .dark ?
+                                                 ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                             Spacer()
                         }
                         .padding([.top, .bottom])
@@ -98,7 +101,8 @@ struct AccountTabView: View {
                     NavigationLink(destination: ResetPasswordView(userViewModel: userViewModel)) {
                         HStack {
                             Text(Constants.Account.changePass)
-                                .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                                .foregroundColor(colorScheme == .dark ?
+                                                 ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                             Spacer()
                         }
                         .padding([.top, .bottom])
@@ -111,7 +115,8 @@ struct AccountTabView: View {
                     }) {
                         HStack {
                             Text(Constants.Account.logout)
-                                .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                                .foregroundColor(colorScheme == .dark ?
+                                                 ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                             Spacer()
                         }
                         .padding([.top, .bottom])
@@ -141,7 +146,8 @@ struct AccountTabView: View {
                 }) {
                     HStack {
                         Text(Constants.Account.policy)
-                            .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                            .foregroundColor(colorScheme == .dark ?
+                                             ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                         Spacer()
                         Image(systemName: Constants.ImageName.chevronRight)
                             .foregroundColor(ThemeManager.imageForeground)
@@ -158,19 +164,23 @@ struct AccountTabView: View {
                         
                         Text("App: \(Bundle.main.appVersionLong)")
                             .font(.subheadline)
-                            .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                            .foregroundColor(colorScheme == .dark ?
+                                             ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                             .padding(5)
                         Text("Content: \(ArcXPContentManager.version)")
                             .font(.subheadline)
-                            .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                            .foregroundColor(colorScheme == .dark ?
+                                             ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                             .padding(5)
                         Text("Commerce: \(Commerce.version)")
                             .font(.subheadline)
-                            .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                            .foregroundColor(colorScheme == .dark ?
+                                             ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                             .padding(5)
                         Text("Video SDK: \(ArcMediaPlayerSDK.versionString)")
                             .font(.subheadline)
-                            .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                            .foregroundColor(colorScheme == .dark ?
+                                             ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                             .padding(5)
                     }
                 }
@@ -179,6 +189,9 @@ struct AccountTabView: View {
             .id(refresh)
             .listStyle(.plain)
             Spacer()
+        }
+        .onAppear {
+            analyticsService.reportScreenView(screen: .accountScreen())
         }
         .background(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
         .banner(data: $bannerData, show: $showBanner)

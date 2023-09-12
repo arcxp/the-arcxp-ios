@@ -44,7 +44,9 @@ struct HTMLStringView: UIViewRepresentable {
                             let nFont = UIFont(descriptor: newFontDescriptor, size: newFont.pointSize)
                             mattrStr.removeAttribute(.font, range: range)
                             mattrStr.addAttribute(.font, value: nFont, range: range)
-                            mattrStr.addAttributes([NSAttributedString.Key.foregroundColor : colorScheme == .dark ? ThemeManager.darkModeArticleTextColor : ThemeManager.lightModeArticleTextColor], range: range)
+                            mattrStr.addAttributes([NSAttributedString.Key.foregroundColor: colorScheme == .dark ?
+                                                    ThemeManager.darkModeArticleTextColor : ThemeManager.lightModeArticleTextColor],
+                                                   range: range)
                         }
                     }
                     mattrStr.endEditing()

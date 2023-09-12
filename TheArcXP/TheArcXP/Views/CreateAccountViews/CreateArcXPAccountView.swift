@@ -23,6 +23,7 @@ struct CreateArcXPAccountView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @Environment(\.colorScheme) var colorScheme
     private var userSignUpModel = UserProfile()
+    private var analyticsService: AnalyticsService = .shared
 
     init() {
         NavigationBarTheme.navigationBarColors(background: ThemeManager.navigationBarUIKitBackgroundColor,
@@ -60,7 +61,8 @@ struct CreateArcXPAccountView: View {
                     VStack(spacing: geometry.size.height * 0.02) {
                         Text(Constants.CreateAccount.name)
                             .font(.headline)
-                            .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                            .foregroundColor(colorScheme == .dark ?
+                                             ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                             .bold()
                             .padding([.trailing], geometry.size.width * 0.72)
 
@@ -131,6 +133,7 @@ struct CreateArcXPAccountView: View {
                             case .success:
                                 shouldLoad = false
                                 willShowSuccessfulSignUp = true
+                                analyticsService.report(event: .userSignUp(signUpType: LoginSignUpType.arcxp))
                             case .failure(let error):
                                 shouldLoad = false
                                 showBanner = true
@@ -158,7 +161,8 @@ struct CreateArcXPAccountView: View {
 
                     HStack(alignment: .center) {
                         Text(Constants.CreateAccount.existingAccount)
-                            .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                            .foregroundColor(colorScheme == .dark ?
+                                             ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                         NavigationLink(Constants.Login.signIn,
                                        destination: SignInView().navigationBarHidden(true),
                                        isActive: $willShowArcXPSignInView)

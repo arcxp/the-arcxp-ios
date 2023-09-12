@@ -37,7 +37,7 @@ class GoogleAdsManager: NSObject {
             if let error {
                 self?.logger.error("Failed to load consent form with error: \(error)")
             } else {
-                /**
+                /*
                  Present the form
                  
                  To ensure the display of test ads following user interaction with the GDPR form,

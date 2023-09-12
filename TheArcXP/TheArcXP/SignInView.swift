@@ -25,6 +25,7 @@ struct SignInView: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var showSignInView: Bool
     @State private var thirdPartyLoginManager: ThirdPartyLoginManager!
+    private var analyticsService: AnalyticsService = .shared
     
     var textFieldsValid: Bool {
         return (!email.isEmpty && !password.isEmpty)
@@ -70,7 +71,8 @@ struct SignInView: View {
                                     .fontWeight(.bold)
                                     .font(.title)
                                     .padding([.leading, .top])
-                                    .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                                    .foregroundColor(colorScheme == .dark ?
+                                                     ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                                 Spacer()
                             }
                             
@@ -92,6 +94,7 @@ struct SignInView: View {
                                                         rememberMe: checked) { result in
                                     switch result {
                                     case .success:
+                                        analyticsService.report(event: .login(loginType: .arcxp))
                                         UIKitNavigation.popToRootView()
                                     case .failure(let error):
                                         showBanner = true
@@ -117,14 +120,16 @@ struct SignInView: View {
                                     }
                                 Text(Constants.Login.rememberMe)
                                     .padding(.vertical, 20)
-                                    .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                                    .foregroundColor(colorScheme == .dark ?
+                                                     ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                                 Spacer()
                             }
                             .frame(maxWidth: geometry.size.width * 0.9)
                             
                             HStack(alignment: .center) {
                                 Text(Constants.Login.noAccount)
-                                    .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                                    .foregroundColor(colorScheme == .dark ?
+                                                     ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                                 NavigationLink(Constants.Login.register,
                                                destination: CreateAccountView().navigationBarHidden(true),
                                                isActive: $navigatedCreateAccount)

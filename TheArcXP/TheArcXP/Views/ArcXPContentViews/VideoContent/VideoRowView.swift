@@ -47,13 +47,15 @@ struct VideoRowView: View {
                     }
                     Text(headline)
                         .font(.headline)
-                        .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
+                        .foregroundColor(colorScheme == .dark ?
+                                         ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
                 }
             } else {
                 HStack(alignment: .top) {
                     Text(headline)
                         .font(.headline)
-                        .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
+                        .foregroundColor(colorScheme == .dark ?
+                                         ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
                         .padding(.top)
                         .fixedSize(horizontal: false, vertical: true)
                     Spacer()

@@ -14,10 +14,10 @@ struct Constants {
     static let title = "The Arc XP"
 
     struct Org {
-        static let siteName = "demo"
-        static let orgName = "demo"
+        static let siteName = "arcsales"
+        static let orgName = "arcsales"
         static let env = "sandbox"
-        static let contentDomain = "demo-demo-sandbox.web.arc-cdn.net"
+        static let contentDomain = "arcsales-arcsales-sandbox.web.arc-cdn.net"
         static let commerceDomain = "arcsales-arcsales-sandbox.api.cdn.arcpublishing.com"
 
         static let siteHierarchyName = "mobile-nav"

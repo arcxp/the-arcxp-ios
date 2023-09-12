@@ -15,6 +15,7 @@ enum CollectionType {
 }
 
 struct HomeTabView: View {
+    var analyticsService: AnalyticsService = .shared
     @State var animate = false
     @State var showBanner = false
     @State var showMenu = false
@@ -47,7 +48,8 @@ struct HomeTabView: View {
         ZStack {
             ThemeManager.menuBackgroundColor
             ZStack {
-                (showMenu ? ThemeManager.menuBackgroundColor.opacity(0.05) : colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
+                (showMenu ? ThemeManager.menuBackgroundColor.opacity(0.05) : colorScheme == .dark ?
+                 ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
                     .edgesIgnoringSafeArea(.all)
                 ZStack(alignment: .leading) {
                     ZStack(alignment: .topLeading) {
@@ -102,7 +104,8 @@ struct HomeTabView: View {
                                         }
                                     } else {    // list-view for all other
                                         List {
-                                            ForEach(Array(contentViewModel.fetchedCollection.enumerated()), id: \.element.identifier) { index, story in
+                                            ForEach(Array(contentViewModel.fetchedCollection.enumerated()),
+                                                    id: \.element.identifier) { index, story in
                                                 VStack {
                                                     if adsEnabled && canPlaceAd(atIndex: index) {
                                                         NativeAdContentView(story: story)
@@ -122,11 +125,11 @@ struct HomeTabView: View {
                                                             .fixedSize(horizontal: false, vertical: true)
                                                         }
                                                     } else if story.type == .video {
+                                                        let storyId = contentViewModel.fetchedCollection.first?.identifier
                                                         VideoRowView(videoContent: story,
                                                                      width: geometry.size.width,
                                                                      height: geometry.size.height,
-                                                                     isFirstItem:
-                                                                        (story.identifier == contentViewModel.fetchedCollection.first?.identifier))
+                                                                     isFirstItem: (story.identifier == storyId))
                                                     }
                                                     NavigationLink(destination: DeferView {
                                                         if story.type == .story {
@@ -139,11 +142,15 @@ struct HomeTabView: View {
                                                     }) {EmptyView()}
                                                         .frame(width: 0)
                                                         .opacity(0)
-                                                        .background(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
+                                                        .background(colorScheme == .dark ?
+                                                                    ThemeManager.darkModeBackgroundColor :
+                                                                        ThemeManager.lightModeBackgroundColor)
                                                 }
-                                                .background(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
+                                                .background(colorScheme == .dark ?
+                                                            ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
                                             }
-                                            .listRowBackground(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
+                                            .listRowBackground(colorScheme == .dark ?
+                                                               ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
 
                                             if contentViewModel.noMoreContent == false {
                                                 ContentLoadingIndicator(width: geometry.size.width,
@@ -154,12 +161,14 @@ struct HomeTabView: View {
                                                 }
                                             }
                                         }
-                                        .background(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
+                                        .background(colorScheme == .dark ?
+                                                    ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
                                         .listStyle(.plain)
                                     }
                                 }
                                 .listStyle(.plain)
-                                .background(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
+                                .background(colorScheme == .dark ?
+                                            ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
                                 .overlay(loadingOverlay)
                                 .banner(data: $bannerData, show: $showBanner)
                                 .onAppear {
@@ -202,6 +211,11 @@ struct HomeTabView: View {
                 AdsServiceFactory.shared.createAdsService { adsService in
                     adsEnabled = adsService.adsEnabled()
                 }
+                // report home screen view
+                analyticsService.reportScreenView(screen: .homeScreen())
+            } else {
+                // report video screen view
+                analyticsService.reportScreenView(screen: .videoScreen())
             }
         }
         .onOpenURL { id in

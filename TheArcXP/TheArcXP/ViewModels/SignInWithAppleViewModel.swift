@@ -15,6 +15,7 @@ class SignInWithAppleViewModel: NSObject, ASAuthorizationControllerDelegate {
     var handler: CommerceLogInCompletion?
     @State var bannerData = ErrorBannerModifier.BannerData(title: "", detail: "", type: .error)
     @State var showBanner = false
+    private var analyticsService: AnalyticsService = .shared
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential,
@@ -25,6 +26,7 @@ class SignInWithAppleViewModel: NSObject, ASAuthorizationControllerDelegate {
         }
         
         Commerce.Identity.logInWithApple(token: token, completion: handler)
+        analyticsService.report(event: .login(loginType: .apple))
     }
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {

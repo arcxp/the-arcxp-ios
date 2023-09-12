@@ -63,7 +63,8 @@ struct TopMenuView: View {
                                     Text(title)
                                         .font(selectedMenuItem?.title == title ? .title2 : .title3)
                                         .padding(.leading)
-                                        .foregroundColor(selectedMenuItem?.title == title ? ThemeManager.foregroundColor : ThemeManager.topMenuDeselectedItem)
+                                        .foregroundColor(selectedMenuItem?.title == title ?
+                                                         ThemeManager.foregroundColor : ThemeManager.topMenuDeselectedItem)
                                 }
                             }
                         }

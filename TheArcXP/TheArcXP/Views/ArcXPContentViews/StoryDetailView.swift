@@ -23,9 +23,11 @@ struct StoryDetailView: View {
     @Binding private var listDisabled: Bool
     @State private var showPaywallScreen: Bool = false
     @State private var adsEnabled: Bool = false
+    private var analyticsService: AnalyticsService = .shared
 
     init(story: ArcXPContent? = nil, widgetStoryIdentifier: String? = nil, searchQuery: Binding<String>, listDisabled: Binding<Bool>) {
-        NavigationBarTheme.navigationBarColors(background: ThemeManager.navigationBarUIKitBackgroundColor, titleColor: ThemeManager.navigationBarTextColor)
+        NavigationBarTheme.navigationBarColors(background: ThemeManager.navigationBarUIKitBackgroundColor,
+                                               titleColor: ThemeManager.navigationBarTextColor)
         self.story = story
         self.widgetStoryIdentifier = widgetStoryIdentifier
         _searchQuery = searchQuery
@@ -42,13 +44,15 @@ struct StoryDetailView: View {
                     }
                     Text(storyContent?.taxonomy?.primarySection?.name ?? Constants.Story.news)
                         .bold()
-                        .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
+                        .foregroundColor(colorScheme == .dark ?
+                                         ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
                         .padding([.leading, .trailing, .top])
                         .background(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
                     Text(storyContent?.headlines?.basic ?? "")
                         .font(.largeTitle)
                         .bold()
-                        .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
+                        .foregroundColor(colorScheme == .dark ?
+                                         ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
                         .padding([.leading, .trailing, .bottom])
                         .background(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
 
@@ -68,7 +72,8 @@ struct StoryDetailView: View {
 
                     if let authors = SDKUtils.formattedAuthorNamesText(storyContent?.authorNames) {
                         Text(authors)
-                            .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
+                            .foregroundColor(colorScheme == .dark ?
+                                             ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
                             .background(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
                             .padding([.leading, .trailing])
                     }
@@ -146,10 +151,14 @@ struct StoryDetailView: View {
                     BannerAdContentView(metaData: storyMetadata, height: setAdHeight(size: geo.size))
                 }
             }
+            .onAppear {
+                analyticsService.reportScreenView(screen: .articleScreen())
+            }
             .banner(data: $bannerData, show: $showBanner)
             .paywall(isShowing: $showPaywallScreen)
             .navigationBarBackButtonHidden(true)
-            .background(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor.ignoresSafeArea() : ThemeManager.lightModeBackgroundColor.ignoresSafeArea())
+            .background(colorScheme == .dark ?
+                        ThemeManager.darkModeBackgroundColor.ignoresSafeArea() : ThemeManager.lightModeBackgroundColor.ignoresSafeArea())
         }
         .accentColor(ThemeManager.navigationBarButtonColor)
     }

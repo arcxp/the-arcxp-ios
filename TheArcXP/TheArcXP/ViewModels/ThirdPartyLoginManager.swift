@@ -15,6 +15,7 @@ typealias CommerceLogInCompletion = ((_ result: Result<UserProfile, Error>) -> V
 public class ThirdPartyLoginManager: NSObject {
     var thirdPartyCompletion: CommerceLogInCompletion?
     var signInWithAppleViewModel: SignInWithAppleViewModel
+    private var analyticsService: AnalyticsService = .shared
     
     private func showAppleLoginView() {
         let provider = ASAuthorizationAppleIDProvider()
@@ -46,6 +47,7 @@ public class ThirdPartyLoginManager: NSObject {
                     return
                 }
                 Commerce.Identity.logInWithFacebook(token: token) { self?.thirdPartyCompletion?($0) }
+                self?.analyticsService.report(event: .login(loginType: .facebook))
             case .failed(let error):
                 self?.thirdPartyCompletion?(.failure(error))
             case .cancelled:

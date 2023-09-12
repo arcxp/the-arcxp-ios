@@ -50,7 +50,8 @@ struct CreateAccountView: View {
                     VStack(alignment: .center, spacing: geometry.size.height * 0.02) {
                         Text(Constants.Account.createAccount)
                             .font(.title)
-                            .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                            .foregroundColor(colorScheme == .dark ?
+                                             ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                             .bold()
                             .padding([.top])
                             .frame(maxHeight: geometry.size.height * 0.07)
@@ -113,11 +114,13 @@ struct CreateAccountView: View {
                         Text("By creating an account you agree to our [Terms of Service](https://www.washingtonpost.com/terms-of-service/2011/11/18/gIQAldiYiN_story.html), [Privacy Policy](https://www.washingtonpost.com/privacy-policy/2011/11/18/gIQASIiaiN_story.html) and Community Policy")
                             .multilineTextAlignment(.center)
                             .padding()
-                            .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                            .foregroundColor(colorScheme == .dark ?
+                                             ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                             .accentColor(.blue)
                         HStack(alignment: .center) {
                             Text(Constants.CreateAccount.existingAccount)
-                                .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
+                                .foregroundColor(colorScheme == .dark ?
+                                                 ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
                             NavigationLink(Constants.Login.signIn,
                                            destination: SignInView().navigationBarHidden(true),
                                            isActive: $willShowArcXPSignInView)

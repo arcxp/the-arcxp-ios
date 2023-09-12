@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 import ArcXP
 import FBSDKCoreKit
+import FirebaseCore
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     
@@ -22,7 +23,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                     application,
                     didFinishLaunchingWithOptions: launchOptions
                 )
-        NotificationCenter.default.addObserver(self, selector: #selector(appDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
+        FirebaseApp.configure()
+        let snakeCaseEventMapper = SnakeCaseAnalyticsEventMapper()
+        // Comment the line of code below to disable Google Analytics event reporting.
+        AnalyticsService.register(provider: GoogleAnalyticsProvider(eventMapper: snakeCaseEventMapper))
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(appDidBecomeActive),
+                                               name: UIApplication.didBecomeActiveNotification, object: nil)
         return true
     }
     

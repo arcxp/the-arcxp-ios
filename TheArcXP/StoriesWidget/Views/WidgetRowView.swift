@@ -28,7 +28,8 @@ struct WidgetRowView: View {
                 HStack {
                     Text(headline)
                         .font(.system(size: 14))
-                        .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
+                        .foregroundColor(colorScheme == .dark ?
+                                         ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
                         .frame(maxWidth: geometry.size.width, alignment: .leading)
                         .padding([.leading, .trailing])
                     ImageView(withURL: headlineImageURL ?? "", withFilename: placeholderFilename)

@@ -37,14 +37,16 @@ struct ArticleBodyView: View {
                             if let imageSubtitle = getImageSubtitle(from: contentElement) {
                                 Text(imageSubtitle)
                                     .font(.caption)
-                                    .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
+                                    .foregroundColor(colorScheme == .dark ?
+                                                     ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
                                     .fontWeight(.bold)
                                     .padding([.leading, .trailing])
                             }
                             if let imageCaption = getImageCaption(from: contentElement) {
                                 Text(imageCaption)
                                     .font(.caption)
-                                    .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
+                                    .foregroundColor(colorScheme == .dark ?
+                                                     ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
                                     .padding([.leading, .trailing, .bottom])
                             }
                         }
@@ -61,14 +63,18 @@ struct ArticleBodyView: View {
                                             if let imageSubtitle = getImageSubtitle(from: imageContentElement) {
                                                 Text(imageSubtitle)
                                                     .font(.caption)
-                                                    .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
+                                                    .foregroundColor(colorScheme == .dark ?
+                                                                     ThemeManager.darkModeContentTextColor :
+                                                                        ThemeManager.lightModeContentTextColor)
                                                     .fontWeight(.bold)
                                                     .padding([.leading, .trailing])
                                             }
                                             if let imageCaption = getImageCaption(from: imageContentElement) {
                                                 Text(imageCaption)
                                                     .font(.caption)
-                                                    .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeContentTextColor : ThemeManager.lightModeContentTextColor)
+                                                    .foregroundColor(colorScheme == .dark ?
+                                                                     ThemeManager.darkModeContentTextColor :
+                                                                        ThemeManager.lightModeContentTextColor)
                                                     .padding([.leading, .trailing, .bottom])
                                             }
                                         }
