@@ -16,6 +16,7 @@ enum CollectionType {
 
 struct HomeTabView: View {
     var analyticsService: AnalyticsService = .shared
+    @ObservedObject var notificationNavigationManager: PushNotificationNavigationManager = .shared
     @State var animate = false
     @State var showBanner = false
     @State var showMenu = false
@@ -28,6 +29,7 @@ struct HomeTabView: View {
     var collectionType: CollectionType
     @Binding var tabSelection: Int
     @State private var showDetailViewFromWidget = false
+    @State private var navigateFromPushNotification = false
     @State private var adsEnabled = false
     @Environment(\.colorScheme) var colorScheme
     @ViewBuilder private var loadingOverlay: some View {
@@ -195,6 +197,13 @@ struct HomeTabView: View {
                     }
                 }
             }
+            if let uuid = notificationNavigationManager.uuid {
+                NavigationLink(destination:
+                                StoryDetailView(pushNotificationUUID: uuid,
+                                                searchQuery: $searchQuery,
+                                                listDisabled: $listDisabled),
+                               isActive: $navigateFromPushNotification) { EmptyView() }
+            }
             if let widgetIdentifier = contentViewModel.storyIDFromWidget {
                 NavigationLink(destination:
                                 StoryDetailView(widgetStoryIdentifier: widgetIdentifier,
@@ -220,6 +229,9 @@ struct HomeTabView: View {
         }
         .onOpenURL { id in
             presentStoryDetailFromWidget(id: id.absoluteString)
+        }
+        .onReceive(notificationNavigationManager.$uuid) { (uuid) in
+            if uuid != nil { navigateFromPushNotification = true }
         }
     }
 

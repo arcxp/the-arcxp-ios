@@ -21,13 +21,19 @@ struct AccountTabView: View {
         detail: "",
         type: .error)
     // These below state vars do nothing and used only for instantiating the HomeNavigationView.
-    // TODO: Try to make these as optional while instantating
     @State var showMenu = false
     @State var searchQuery = ""
     @State var listDisabled = false
     @State var sectionListHidden = false
     @StateObject fileprivate var contentViewModel = ContentViewModel()
     private var analyticsService: AnalyticsService = .shared
+    
+    fileprivate func getMenuItems() -> SectionList {
+        contentViewModel.getMenuItems { result in
+            guard result.value != nil else { return }
+        }
+        return contentViewModel.menuItems
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -155,6 +161,12 @@ struct AccountTabView: View {
                     .padding([.top, .bottom])
                 }
                 .listRowBackground(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
+                
+                NavigationLink(destination:
+                                NotificationSettingsView(viewModel: NotificationSettingsViewModel(sectionList: contentViewModel.menuItems.isEmpty ? getMenuItems() : contentViewModel.menuItems))) {
+                    Text(Constants.Account.notificationSettings)
+                }
+                .padding([.top, .bottom])
                 
                 VStack {
                     Text(Constants.Account.softwareVersion)

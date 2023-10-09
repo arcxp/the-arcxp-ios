@@ -15,6 +15,7 @@ struct StoryDetailView: View {
     private var story: ArcXPContent?
     @State private var storyMetadata = ContentMetadata(keywords: [], articleURL: "")
     private var widgetStoryIdentifier: String?
+    private var pushNotificationUUID: String?
     @State private var storyContent: ArcXPContent?
     @State private var showBanner = false
     @State private var bannerData = ErrorBannerModifier.BannerData(title: "", detail: "", type: .error)
@@ -25,11 +26,13 @@ struct StoryDetailView: View {
     @State private var adsEnabled: Bool = false
     private var analyticsService: AnalyticsService = .shared
 
-    init(story: ArcXPContent? = nil, widgetStoryIdentifier: String? = nil, searchQuery: Binding<String>, listDisabled: Binding<Bool>) {
+    init(story: ArcXPContent? = nil, widgetStoryIdentifier: String? = nil, pushNotificationUUID: String? = nil,
+         searchQuery: Binding<String>, listDisabled: Binding<Bool>) {
         NavigationBarTheme.navigationBarColors(background: ThemeManager.navigationBarUIKitBackgroundColor,
                                                titleColor: ThemeManager.navigationBarTextColor)
         self.story = story
         self.widgetStoryIdentifier = widgetStoryIdentifier
+        self.pushNotificationUUID = pushNotificationUUID
         _searchQuery = searchQuery
         _listDisabled = listDisabled
     }
@@ -136,6 +139,8 @@ struct StoryDetailView: View {
                     }
                     } else if let widgetStoryIdentifier = widgetStoryIdentifier {
                         fetchStory(id: widgetStoryIdentifier)
+                    } else if let pushNotificationUUID {
+                        fetchStory(id: pushNotificationUUID)
                     }
                     AdsServiceFactory.shared.createAdsService { adsService in
                         adsEnabled = adsService.adsEnabled()

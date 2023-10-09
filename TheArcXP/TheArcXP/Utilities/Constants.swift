@@ -24,6 +24,11 @@ struct Constants {
         static let videoCollectionAlias = "mobile-video"
     }
 
+    struct AppInfo {
+        static let googlePlist = "GoogleService-Info"
+        static let plist = "plist"
+    }
+    
     struct Colors {
         static let Blue = Color("ArcXPBlue")
         static let DarkGray = Color("ArcXPDarkGray")
@@ -79,7 +84,15 @@ struct Constants {
         static let policy = "Policies"
         static let terms = "Terms of Service"
         static let cancel = "Cancel"
+        static let back = "Back"
         static let softwareVersion = "Software Versions"
+        static let notificationSettings = "Notification Settings"
+        static let options = "Options"
+        static let subToAll = "Subscribe to all topics"
+        static let subToTopics = "Topics to subscribe to"
+        static let allowNotifications = "Allow notifications"
+        static let toggleKey = "toggle_"
+        static let subToAllKey = "subscribeToAll"
     }
 
     struct TabBar {
@@ -162,6 +175,14 @@ struct Constants {
         static let fourAndHalfStars = "stars_4_5"
         static let fourStars = "stars_4"
         static let threeAndHalfStars = "stars_3_5"
+    }
+    
+    struct RemoteNotifications {
+        static let didReceiveNotification = "didReceiveNotification"
+        static let uuid = "uuid"
+        static let contentType = "content-type"
+        static let token = "token"
+        static let fcmNotification = "FCMToken"
     }
 }
 
