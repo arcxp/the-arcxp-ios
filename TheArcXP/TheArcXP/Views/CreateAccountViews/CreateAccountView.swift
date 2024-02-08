@@ -40,12 +40,13 @@ struct CreateAccountView: View {
                 ThemeManager.secondaryBackgroundColor.ignoresSafeArea(.all)
                     .navigationBarTitle(Constants.title)
                     .navigationBarTitleDisplayMode(.inline)
-                    .navigationBarItems(
-                        leading:
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
                             Button(Constants.Account.cancel) {
                                 UIKitNavigation.popToRootView()
                             }
-                    )
+                        }
+                    }
                 GeometryReader { geometry in
                     VStack(alignment: .center, spacing: geometry.size.height * 0.02) {
                         Text(Constants.Account.createAccount)
@@ -131,6 +132,7 @@ struct CreateAccountView: View {
                 .background(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
             }
         }
+        .navigationBarHidden(true)
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
             thirdPartyLoginManager = ThirdPartyLoginManager(thirdPartyCompletionHandler: didCompleteThirdPartyLogin)

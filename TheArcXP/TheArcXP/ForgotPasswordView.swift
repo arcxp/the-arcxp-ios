@@ -58,9 +58,13 @@ struct ForgotPasswordView: View {
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .navigationBarTitle(Constants.title,
                                 displayMode: .inline)
-            .navigationBarItems(trailing: Button(Constants.ForgotPassword.dismiss) {
-                presentationMode.wrappedValue.dismiss()
-            })
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(Constants.ForgotPassword.dismiss) {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }

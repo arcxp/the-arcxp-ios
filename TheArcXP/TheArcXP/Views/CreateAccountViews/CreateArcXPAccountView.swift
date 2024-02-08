@@ -43,12 +43,13 @@ struct CreateArcXPAccountView: View {
             ThemeManager.secondaryBackgroundColor.ignoresSafeArea(.all)
                 .navigationBarTitle(Constants.title)
                 .navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(
-                    leading:
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
                         Button(Constants.Account.cancel) {
                             mode.wrappedValue.dismiss()
                         }
-                )
+                    }
+                }
             GeometryReader { geometry in
                 VStack(alignment: .center, spacing: geometry.size.height * 0.02) {
                     Text(Constants.Account.createAccount)

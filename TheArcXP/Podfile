@@ -6,11 +6,11 @@ platform :ios, '15.0'
 use_frameworks!
 
 target 'TheArcXP' do
-  pod 'ArcXP', '1.0.0'
-end 
+  pod 'ArcXP', '1.0.3'
+end
 target 'StoriesWidgetExtension' do
-  pod 'ArcXP', '1.0.0'
+  pod 'ArcXP', '1.0.3'
 end
 target 'Widget' do
-  pod 'ArcXP', '1.0.0'
+  pod 'ArcXP', '1.0.3'
 end

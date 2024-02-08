@@ -24,10 +24,11 @@ struct StoryDetailView: View {
     @Binding private var listDisabled: Bool
     @State private var showPaywallScreen: Bool = false
     @State private var adsEnabled: Bool = false
+    @Binding var tabBarVisibility: Visibility
     private var analyticsService: AnalyticsService = .shared
 
     init(story: ArcXPContent? = nil, widgetStoryIdentifier: String? = nil, pushNotificationUUID: String? = nil,
-         searchQuery: Binding<String>, listDisabled: Binding<Bool>) {
+         searchQuery: Binding<String>, listDisabled: Binding<Bool>, tabBarVisibility: Binding<Visibility> = .constant(Visibility.hidden)) {
         NavigationBarTheme.navigationBarColors(background: ThemeManager.navigationBarUIKitBackgroundColor,
                                                titleColor: ThemeManager.navigationBarTextColor)
         self.story = story
@@ -35,6 +36,7 @@ struct StoryDetailView: View {
         self.pushNotificationUUID = pushNotificationUUID
         _searchQuery = searchQuery
         _listDisabled = listDisabled
+        _tabBarVisibility = tabBarVisibility
     }
 
     var body: some View {
@@ -90,8 +92,8 @@ struct StoryDetailView: View {
                 }
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                 .navigationBarTitle("", displayMode: .inline)
-                .navigationBarItems(
-                    leading:
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
                         Button(Constants.CreateAccount.done) {
                             // if the searchQuery is not empty i.e. search mode is enabled
                             // query for the same search result using the same search query,
@@ -115,16 +117,17 @@ struct StoryDetailView: View {
                                     }
                                 }
                             }
+                            tabBarVisibility = .visible
                             mode.wrappedValue.dismiss()
-                        },
-                    trailing:
-                        Button {
-                            // TODO: Add sharing functionality.
-                            // Handled in another ticket
-                        } label: {
-                            Image(systemName: Constants.ImageName.share)
                         }
-                )
+                    }
+                    
+                    if let shareUrl = constructShareURL(canonicalUrl: story?.canonicalUrl) {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            ShareLink(item: shareUrl)
+                        }
+                    }
+                }
                 .onAppear {
                     if let story = story {
                         storyContent = story
@@ -158,10 +161,12 @@ struct StoryDetailView: View {
             }
             .onAppear {
                 analyticsService.reportScreenView(screen: .articleScreen())
+                tabBarVisibility = .hidden
             }
             .banner(data: $bannerData, show: $showBanner)
             .paywall(isShowing: $showPaywallScreen)
             .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar)
             .background(colorScheme == .dark ?
                         ThemeManager.darkModeBackgroundColor.ignoresSafeArea() : ThemeManager.lightModeBackgroundColor.ignoresSafeArea())
         }
@@ -219,5 +224,10 @@ struct StoryDetailView: View {
             return size.height / 6.5
         }
         return size.height / 8
+    }
+    
+    private func constructShareURL(canonicalUrl: String?) -> String? {
+        guard let canonicalUrl = canonicalUrl else { return nil }
+        return "https://\(Constants.Org.contentDomain)\(canonicalUrl)"
     }
 }

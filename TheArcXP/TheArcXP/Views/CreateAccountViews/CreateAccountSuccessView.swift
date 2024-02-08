@@ -24,12 +24,13 @@ struct CreateAccountSuccessView: View {
                 ThemeManager.secondaryBackgroundColor.ignoresSafeArea(.all)
                     .navigationTitle(Constants.title)
                     .navigationBarTitleDisplayMode(.inline)
-                    .navigationBarItems(
-                        leading:
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
                             Button(Constants.Login.close) {
                                 UIKitNavigation.popToRootView()
                             }
-                    )
+                        }
+                    }
                 
                 VStack {
                     Image(systemName: Constants.ImageName.checkmark)

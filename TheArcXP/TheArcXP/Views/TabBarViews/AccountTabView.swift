@@ -53,7 +53,7 @@ struct AccountTabView: View {
                     .listRowBackground(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
                 if Commerce.cachedUserProfile == nil && showSignInControl {
                     // A user is not signed in
-                    NavigationLink(destination: CreateAccountView().navigationBarHidden(true)) {
+                    CustomNavLinkView(destination: CreateAccountView().navigationBarBackButtonHidden(true)) {
                         HStack {
                             Text(Constants.Account.createAccount)
                                 .foregroundColor(colorScheme == .dark ?
@@ -63,8 +63,7 @@ struct AccountTabView: View {
                         .padding([.top, .bottom])
                     }
                     .listRowBackground(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
-                    
-                    NavigationLink(destination: SignInView(showSignInView: $showSignInControl).navigationBarHidden(true)) {
+                    CustomNavLinkView(destination: SignInView(showSignInView: $showSignInControl).navigationBarHidden(true)) {
                         HStack {
                             Text(Constants.Account.login)
                                 .foregroundColor(colorScheme == .dark ?
@@ -74,6 +73,7 @@ struct AccountTabView: View {
                         .padding([.top, .bottom])
                     }
                     .listRowBackground(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
+                    
                 } else {
                     // A user is signed in
                     VStack(alignment: .leading) {
@@ -103,8 +103,7 @@ struct AccountTabView: View {
                             }
                         }
                     }
-                    
-                    NavigationLink(destination: ResetPasswordView(userViewModel: userViewModel)) {
+                    CustomNavLinkView(destination: ResetPasswordView(userViewModel: userViewModel)) {
                         HStack {
                             Text(Constants.Account.changePass)
                                 .foregroundColor(colorScheme == .dark ?
@@ -113,7 +112,6 @@ struct AccountTabView: View {
                         }
                         .padding([.top, .bottom])
                     }
-                    
                     Button(action: {
                         Commerce.logOut()
                         showSignInControl = true
@@ -161,13 +159,12 @@ struct AccountTabView: View {
                     .padding([.top, .bottom])
                 }
                 .listRowBackground(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
-                
-                NavigationLink(destination:
-                                NotificationSettingsView(viewModel: NotificationSettingsViewModel(sectionList: contentViewModel.menuItems.isEmpty ? getMenuItems() : contentViewModel.menuItems))) {
+                CustomNavLinkView(destination: NotificationSettingsView(
+                    viewModel: NotificationSettingsViewModel(
+                        sectionList: contentViewModel.menuItems.isEmpty ? getMenuItems() : contentViewModel.menuItems))) {
                     Text(Constants.Account.notificationSettings)
                 }
                 .padding([.top, .bottom])
-                
                 VStack {
                     Text(Constants.Account.softwareVersion)
                         .foregroundColor(colorScheme == .dark ? ThemeManager.darkModeLabelTextColor : ThemeManager.lightModeLabelTextColor)
@@ -207,6 +204,7 @@ struct AccountTabView: View {
         }
         .background(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
         .banner(data: $bannerData, show: $showBanner)
+        .toolbar(.visible, for: .tabBar)
     }
 }
 

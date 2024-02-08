@@ -57,12 +57,13 @@ struct SignInView: View {
                 ThemeManager.secondaryBackgroundColor.ignoresSafeArea(.all)
                     .navigationBarTitle(Constants.title)
                     .navigationBarTitleDisplayMode(.inline)
-                    .navigationBarItems(
-                        leading:
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
                             Button(Constants.Account.cancel) {
                                 UIKitNavigation.popToRootView()
                             }
-                    )
+                        }
+                    }
                 GeometryReader { geometry in
                     ScrollView {
                         VStack {

@@ -1,16 +1,16 @@
 PODS:
-  - ArcXP (1.0.0)
+  - ArcXP (1.0.3)
 
 DEPENDENCIES:
-  - ArcXP (= 1.0.0)
+  - ArcXP (= 1.0.3)
 
 SPEC REPOS:
   "git@github.com:arcxp/arc-mobile-podspecs.git":
     - ArcXP
 
 SPEC CHECKSUMS:
-  ArcXP: 4f064624408fdc12dd63f89fb2170f8a80fcb3ff
+  ArcXP: 115c83427f2616e5a4e2299ab5373a82d6d73a49
 
-PODFILE CHECKSUM: 279434dbb9ec3e4558d71e0467f801f93ec1c0db
+PODFILE CHECKSUM: 29a69292772f9e0f4e673b96858c8a508cdb819a
 
 COCOAPODS: 1.12.1

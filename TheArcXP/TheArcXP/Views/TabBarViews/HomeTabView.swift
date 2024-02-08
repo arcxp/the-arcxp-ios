@@ -31,6 +31,7 @@ struct HomeTabView: View {
     @State private var showDetailViewFromWidget = false
     @State private var navigateFromPushNotification = false
     @State private var adsEnabled = false
+    @State var tabBarVisibility: Visibility = .visible
     @Environment(\.colorScheme) var colorScheme
     @ViewBuilder private var loadingOverlay: some View {
         if isLoading {
@@ -47,53 +48,116 @@ struct HomeTabView: View {
     }
 
     var body: some View {
-        ZStack {
-            ThemeManager.menuBackgroundColor
+        NavigationView {
             ZStack {
-                (showMenu ? ThemeManager.menuBackgroundColor.opacity(0.05) : colorScheme == .dark ?
-                 ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
+                ThemeManager.menuBackgroundColor
+                ZStack {
+                    (showMenu ? ThemeManager.menuBackgroundColor.opacity(0.05) : colorScheme == .dark ?
+                     ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
                     .edgesIgnoringSafeArea(.all)
-                ZStack(alignment: .leading) {
-                    ZStack(alignment: .topLeading) {
-                        VStack(spacing: 0) {
-                            switch collectionType {
-                            case .story:
-                                HomeNavigationView(storiesViewModel: contentViewModel,
-                                                   bannerData: $bannerData,
-                                                   showMenu: $showMenu,
-                                                   showBanner: $showBanner,
-                                                   listDisabled: $listDisabled,
-                                                   sectionListHidden: $sectionListHidden,
-                                                   searchQuery: $searchQuery,
-                                                   showOnlyTitle: false)
-                                TopMenuView(menuItems: contentViewModel.menuItems,
-                                            selectedMenuItem: $contentViewModel.selectedMenuItem,
-                                            storiesViewModel: contentViewModel,
-                                            isLoading: $isLoading,
-                                            showBanner: $showBanner,
-                                            bannerData: $bannerData)
-                                .hidden($sectionListHidden)
-                            default:
-                                HomeNavigationView(storiesViewModel: contentViewModel,
-                                                   bannerData: $bannerData,
-                                                   showMenu: $showMenu,
-                                                   showBanner: $showBanner,
-                                                   listDisabled: $listDisabled,
-                                                   sectionListHidden: $sectionListHidden,
-                                                   searchQuery: $searchQuery,
-                                                   showOnlyTitle: true)
-                            }
-                            GeometryReader { geometry in
-                                VStack {
-                                    // It's a grid view for iPad video tab
-                                    if UIDevice.current.userInterfaceIdiom == .pad && collectionType == .video {
-                                        ScrollView {
-                                            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
-                                                ForEach(contentViewModel.fetchedCollection, id: \.identifier) { story in
-                                                    VideoiPadRowView(videoContent: story)
+                    ZStack(alignment: .leading) {
+                        ZStack(alignment: .topLeading) {
+                            VStack(spacing: 0) {
+                                switch collectionType {
+                                case .story:
+                                    HomeNavigationView(storiesViewModel: contentViewModel,
+                                                       bannerData: $bannerData,
+                                                       showMenu: $showMenu,
+                                                       showBanner: $showBanner,
+                                                       listDisabled: $listDisabled,
+                                                       sectionListHidden: $sectionListHidden,
+                                                       searchQuery: $searchQuery,
+                                                       showOnlyTitle: false)
+                                    TopMenuView(menuItems: contentViewModel.menuItems,
+                                                selectedMenuItem: $contentViewModel.selectedMenuItem,
+                                                storiesViewModel: contentViewModel,
+                                                isLoading: $isLoading,
+                                                showBanner: $showBanner,
+                                                bannerData: $bannerData)
+                                    .hidden($sectionListHidden)
+                                default:
+                                    HomeNavigationView(storiesViewModel: contentViewModel,
+                                                       bannerData: $bannerData,
+                                                       showMenu: $showMenu,
+                                                       showBanner: $showBanner,
+                                                       listDisabled: $listDisabled,
+                                                       sectionListHidden: $sectionListHidden,
+                                                       searchQuery: $searchQuery,
+                                                       showOnlyTitle: true)
+                                }
+                                GeometryReader { geometry in
+                                    VStack {
+                                        // It's a grid view for iPad video tab
+                                        if UIDevice.current.userInterfaceIdiom == .pad && collectionType == .video {
+                                            ScrollView {
+                                                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
+                                                    ForEach(contentViewModel.fetchedCollection, id: \.identifier) { story in
+                                                        VideoiPadRowView(videoContent: story)
+                                                    }
+                                                    .padding(.all, 20)
+                                                    
+                                                    if contentViewModel.noMoreContent == false {
+                                                        ContentLoadingIndicator(width: geometry.size.width,
+                                                                                height: geometry.size.height,
+                                                                                $animate)
+                                                        .onAppear {
+                                                            fetchCollectionResults()
+                                                        }
+                                                    }
                                                 }
-                                                .padding(.all, 20)
-
+                                            }
+                                        } else {    // list-view for all other
+                                            List {
+                                                ForEach(Array(contentViewModel.fetchedCollection.enumerated()),
+                                                        id: \.element.identifier) { index, story in
+                                                    VStack {
+                                                        if adsEnabled && canPlaceAd(atIndex: index) {
+                                                            NativeAdContentView(story: story)
+                                                        }
+                                                        if story.type == .story {
+                                                            if story.identifier == contentViewModel.fetchedCollection.first?.identifier {
+                                                                ListStoryRowView(story: story,
+                                                                                 width: geometry.size.width,
+                                                                                 height: geometry.size.height,
+                                                                                 first: true)
+                                                                .fixedSize(horizontal: false, vertical: true)
+                                                            } else {
+                                                                ListStoryRowView(story: story,
+                                                                                 width: geometry.size.width,
+                                                                                 height: geometry.size.height,
+                                                                                 first: false)
+                                                                .fixedSize(horizontal: false, vertical: true)
+                                                            }
+                                                        } else if story.type == .video {
+                                                            let storyId = contentViewModel.fetchedCollection.first?.identifier
+                                                            VideoRowView(videoContent: story,
+                                                                         width: geometry.size.width,
+                                                                         height: geometry.size.height,
+                                                                         isFirstItem: (story.identifier == storyId))
+                                                        }
+                                                        NavigationLink(destination: DeferView {
+                                                            if story.type == .story {
+                                                                StoryDetailView(story: story,
+                                                                                searchQuery: $searchQuery,
+                                                                                listDisabled: $listDisabled,
+                                                                                tabBarVisibility: $tabBarVisibility)
+                                                            } else if story.type == .video {
+                                                                VideoPlayerView(storyIdentfier: story.identifier,
+                                                                                tabBarVisibility: $tabBarVisibility)
+                                                            }
+                                                        }) {EmptyView()}
+                                                            .frame(width: 0)
+                                                            .opacity(0)
+                                                            .background(colorScheme == .dark ?
+                                                                        ThemeManager.darkModeBackgroundColor :
+                                                                            ThemeManager.lightModeBackgroundColor)
+                                                    }
+                                                    .background(colorScheme == .dark ?
+                                                                ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
+                                                }
+                                                        .listRowBackground(colorScheme == .dark ?
+                                                                           ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
+                                                
                                                 if contentViewModel.noMoreContent == false {
                                                     ContentLoadingIndicator(width: geometry.size.width,
                                                                             height: geometry.size.height,
@@ -103,136 +167,79 @@ struct HomeTabView: View {
                                                     }
                                                 }
                                             }
+                                            .background(colorScheme == .dark ?
+                                                        ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
+                                            .listStyle(.plain)
                                         }
-                                    } else {    // list-view for all other
-                                        List {
-                                            ForEach(Array(contentViewModel.fetchedCollection.enumerated()),
-                                                    id: \.element.identifier) { index, story in
-                                                VStack {
-                                                    if adsEnabled && canPlaceAd(atIndex: index) {
-                                                        NativeAdContentView(story: story)
-                                                    }
-                                                    if story.type == .story {
-                                                        if story.identifier == contentViewModel.fetchedCollection.first?.identifier {
-                                                            ListStoryRowView(story: story,
-                                                                             width: geometry.size.width,
-                                                                             height: geometry.size.height,
-                                                                             first: true)
-                                                            .fixedSize(horizontal: false, vertical: true)
-                                                        } else {
-                                                            ListStoryRowView(story: story,
-                                                                             width: geometry.size.width,
-                                                                             height: geometry.size.height,
-                                                                             first: false)
-                                                            .fixedSize(horizontal: false, vertical: true)
-                                                        }
-                                                    } else if story.type == .video {
-                                                        let storyId = contentViewModel.fetchedCollection.first?.identifier
-                                                        VideoRowView(videoContent: story,
-                                                                     width: geometry.size.width,
-                                                                     height: geometry.size.height,
-                                                                     isFirstItem: (story.identifier == storyId))
-                                                    }
-                                                    NavigationLink(destination: DeferView {
-                                                        if story.type == .story {
-                                                            StoryDetailView(story: story,
-                                                                            searchQuery: $searchQuery,
-                                                                            listDisabled: $listDisabled)
-                                                        } else if story.type == .video {
-                                                            VideoPlayerView(storyIdentfier: story.identifier)
-                                                        }
-                                                    }) {EmptyView()}
-                                                        .frame(width: 0)
-                                                        .opacity(0)
-                                                        .background(colorScheme == .dark ?
-                                                                    ThemeManager.darkModeBackgroundColor :
-                                                                        ThemeManager.lightModeBackgroundColor)
-                                                }
-                                                .background(colorScheme == .dark ?
-                                                            ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
-                                            }
-                                            .listRowBackground(colorScheme == .dark ?
-                                                               ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
-
-                                            if contentViewModel.noMoreContent == false {
-                                                ContentLoadingIndicator(width: geometry.size.width,
-                                                                        height: geometry.size.height,
-                                                                        $animate)
-                                                .onAppear {
-                                                    fetchCollectionResults()
-                                                }
-                                            }
-                                        }
-                                        .background(colorScheme == .dark ?
-                                                    ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
-                                        .listStyle(.plain)
                                     }
+                                    .listStyle(.plain)
+                                    .background(colorScheme == .dark ?
+                                                ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
+                                    .overlay(loadingOverlay)
+                                    .banner(data: $bannerData, show: $showBanner)
+                                    .onAppear {
+                                        listDisabled = false
+                                    }
+                                    .disabled(listDisabled)
                                 }
-                                .listStyle(.plain)
-                                .background(colorScheme == .dark ?
-                                            ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
-                                .overlay(loadingOverlay)
-                                .banner(data: $bannerData, show: $showBanner)
-                                .onAppear {
-                                    listDisabled = false
-                                }
-                                .disabled(listDisabled)
+                                Spacer()
                             }
-                            Spacer()
+                            .background(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
                         }
-                        .background(colorScheme == .dark ? ThemeManager.darkModeBackgroundColor : ThemeManager.lightModeBackgroundColor)
-                    }
-
-                    ZStack(alignment: .leading) {
-                        if showMenu {
-                            MenuContainerView(menuItems: .constant(contentViewModel.menuItems),
-                                              selectedMenuItem: $contentViewModel.selectedMenuItem,
-                                              showMenu: $showMenu,
-                                              storiesViewModel: contentViewModel,
-                                              isLoading: $isLoading,
-                                              showBanner: $showBanner,
-                                              bannerData: $bannerData)
-                            Spacer()
+                        
+                        ZStack(alignment: .leading) {
+                            if showMenu {
+                                MenuContainerView(menuItems: .constant(contentViewModel.menuItems),
+                                                  selectedMenuItem: $contentViewModel.selectedMenuItem,
+                                                  showMenu: $showMenu,
+                                                  storiesViewModel: contentViewModel,
+                                                  isLoading: $isLoading,
+                                                  showBanner: $showBanner,
+                                                  bannerData: $bannerData)
+                                Spacer()
+                            }
                         }
                     }
                 }
-            }
-            if let uuid = notificationNavigationManager.uuid {
-                NavigationLink(destination:
-                                StoryDetailView(pushNotificationUUID: uuid,
-                                                searchQuery: $searchQuery,
-                                                listDisabled: $listDisabled),
-                               isActive: $navigateFromPushNotification) { EmptyView() }
-            }
-            if let widgetIdentifier = contentViewModel.storyIDFromWidget {
-                NavigationLink(destination:
-                                StoryDetailView(widgetStoryIdentifier: widgetIdentifier,
-                                                searchQuery: $searchQuery,
-                                                listDisabled: $listDisabled),
-                               isActive: $showDetailViewFromWidget) { EmptyView() }
-            }
-        }
-        .onAppear {
-            // Fetch menu items only in home-tab, and avoid in video-tab
-            // Show native ads only in home-tab
-            if collectionType != .video {
-                fetchMenuItems()
-                AdsServiceFactory.shared.createAdsService { adsService in
-                    adsEnabled = adsService.adsEnabled()
+                if let uuid = notificationNavigationManager.uuid {
+                    NavigationLink(destination:
+                                    StoryDetailView(pushNotificationUUID: uuid,
+                                                    searchQuery: $searchQuery,
+                                                    listDisabled: $listDisabled),
+                                   isActive: $navigateFromPushNotification) { EmptyView() }
                 }
-                // report home screen view
-                analyticsService.reportScreenView(screen: .homeScreen())
-            } else {
-                // report video screen view
-                analyticsService.reportScreenView(screen: .videoScreen())
+                if let widgetIdentifier = contentViewModel.storyIDFromWidget {
+                    NavigationLink(destination:
+                                    StoryDetailView(widgetStoryIdentifier: widgetIdentifier,
+                                                    searchQuery: $searchQuery,
+                                                    listDisabled: $listDisabled),
+                                   isActive: $showDetailViewFromWidget) { EmptyView() }
+                }
+            }
+            .onAppear {
+                // Fetch menu items only in home-tab, and avoid in video-tab
+                // Show native ads only in home-tab
+                if collectionType != .video {
+                    fetchMenuItems()
+                    AdsServiceFactory.shared.createAdsService { adsService in
+                        adsEnabled = adsService.adsEnabled()
+                    }
+                    // report home screen view
+                    analyticsService.reportScreenView(screen: .homeScreen())
+                } else {
+                    // report video screen view
+                    analyticsService.reportScreenView(screen: .videoScreen())
+                }
+            }
+            .onOpenURL { id in
+                presentStoryDetailFromWidget(id: id.absoluteString)
+            }
+            .onReceive(notificationNavigationManager.$uuid) { (uuid) in
+                if uuid != nil { navigateFromPushNotification = true }
             }
         }
-        .onOpenURL { id in
-            presentStoryDetailFromWidget(id: id.absoluteString)
-        }
-        .onReceive(notificationNavigationManager.$uuid) { (uuid) in
-            if uuid != nil { navigateFromPushNotification = true }
-        }
+        .navigationViewStyle(.stack)
+        .toolbar(tabBarVisibility, for: .tabBar)
     }
 
     private func fetchMenuItems() {

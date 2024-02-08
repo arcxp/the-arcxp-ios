@@ -16,10 +16,17 @@ struct VideoPlayerView: View {
     var isFullScreen: Bool
     var storyIdentifier: String?
     @State private var showPaywallScreen: Bool = false
-
-    init(storyIdentfier: String? = nil, isFullScreen: Bool = true) {
+    var fromArticle: Bool
+    @Binding var tabBarVisibility: Visibility
+    
+    init(storyIdentfier: String? = nil, 
+         isFullScreen: Bool = true,
+         fromArticle: Bool = false,
+         tabBarVisibility: Binding<Visibility> = .constant(Visibility.hidden)) {
         self.storyIdentifier = storyIdentfier
         self.isFullScreen = isFullScreen
+        self.fromArticle = fromArticle
+        _tabBarVisibility = tabBarVisibility
     }
 
     var body: some View {
@@ -27,7 +34,13 @@ struct VideoPlayerView: View {
             ArcPlayerViewController(arcVideo: $arcVideo, playOnLoad: isFullScreen)
                 .transition(.move(edge: .bottom))
                 .edgesIgnoringSafeArea(.all)
-                .onAppear(perform: fetchVideoContent)
+                .onAppear {
+                    fetchVideoContent()
+                    tabBarVisibility = .hidden
+                }
+                .onDisappear {
+                    tabBarVisibility = .visible
+                }
                 .paywall(isShowing: $showPaywallScreen)
         } else {
             ArcPlayerViewController(arcVideo: $arcVideo)
@@ -40,12 +53,15 @@ struct VideoPlayerView: View {
         guard let storyIdentifier = storyIdentifier else {
             return
         }
-        showPaywallScreen = PaywallLoader.shouldShowPaywall(contentID: storyIdentifier, contentType: .video)
-
-        // If paywall screen is shown, avoid proceeding further
-        guard !showPaywallScreen else {
-            return
+        
+        if !fromArticle {
+            showPaywallScreen = PaywallLoader.shouldShowPaywall(contentID: storyIdentifier, contentType: .video)
+            // If paywall screen is shown, avoid proceeding further
+            guard !showPaywallScreen else {
+                return
+            }
         }
+
         ArcMediaClientManager.client.video(mediaID: storyIdentifier,
                                            adSettings: nil,
                                            accessToken: "unused") { (videoResult) in

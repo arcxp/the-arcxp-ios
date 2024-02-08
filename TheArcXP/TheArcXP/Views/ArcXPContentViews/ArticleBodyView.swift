@@ -84,7 +84,9 @@ struct ArticleBodyView: View {
                             .aspectRatio(4/3, contentMode: .fit)
                         }
                     case ContentType.video.rawValue:
-                        VideoPlayerView(storyIdentfier: contentElement.id, isFullScreen: false)
+                        VideoPlayerView(storyIdentfier: contentElement.id, 
+                                        isFullScreen: false,
+                                        fromArticle: true)
                             .frame(width: width * 0.85, height: height * 0.3)
                     default:
                         Text("")
