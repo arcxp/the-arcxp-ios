@@ -1,3 +1,5 @@
+** Note: we have removed our cocoapods repos, so you will have to compile the sdk yourself to use this sample project. *8
+
 #  Getting started with ArcXP News
 
 ## Description
